@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/index-style.css') }}" rel="stylesheet">
+	<title>Cep Correios</title>
+	<style type="text/css"> html, body{ height: 100%; } .full-page{ height: 100vh; width: 100vw; } </style>
+</head>
+<body>
+	<section class="sec h-100">
+	  <header class="container h-100 ">
+	    <div class="d-flex align-items-center justify-content-center h-100">
+	      <div class="d-flex flex-column">
+
+	      	<div class="card cardconf w-60">
+	      		<div class="card-body">
+	      			<h2 class="cardtitle font-weight-bold mb-3">Aplicação para buscar dados sobre o cep informado.</h2>
+	      			<form class="d-flex justify-content-center" action="/search" method="post"><br>
+							  <input type="text" class="form-control inpconf" name="cep" maxlength="9" placeholder="Digite o cep" required>
+							  <button type="submit" class="btn btncon ml-2">Buscar</button>
+							</form>
+              {% if busca %}
+  							{% if busca['erro'] %}
+                <div class="mt-3 alert alert-danger" role="alert">
+                  <strong>CEP não encontrado!</strong>
+                </div>
+                {% else %}
+  							<div class="mt-3">
+  								<p class="results font-weight-bold">Resultados:</p>
+  								<h2 class="resultstitle">Cep: {{ busca['cep'] }}</h2>
+  								<h2 class="resultstitle">Logradouro: {{ busca['logradouro'] }}</h2>
+  								<h2 class="resultstitle">Complemento: {{ busca['complemento'] }}</h2>
+  								<h2 class="resultstitle">Bairro: {{ busca['bairro'] }}</h2>
+  								<h2 class="resultstitle">Localidade: {{ busca['localidade'] }}</h2>
+  								<h2 class="resultstitle">Uf: {{ busca['uf'] }}</h2>
+  								<h2 class="resultstitle">DDD: {{ busca['ddd'] }}</h2>
+  								<h2 class="resultstitle">Cód. Igbe: {{ busca['ibge'] }}</h2>
+  							</div>
+  							{% endif %}
+              {% endif %}
+	      		</div>
+	      	</div>
+
+	      </div>
+	    </div>
+	  </header>
+	</section>
+
+	<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>
